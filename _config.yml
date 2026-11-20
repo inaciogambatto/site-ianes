@@ -22,6 +22,7 @@ collections:
 exclude:
   - README.md
   - GUIA-DO-EDITOR.md
+  - Guia-do-Editor-IANES.pdf
   - Gemfile
   - Gemfile.lock
   - vendor
