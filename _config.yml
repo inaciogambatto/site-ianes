@@ -1,0 +1,27 @@
+# Configuração do site (Jekyll / GitHub Pages)
+title: IANES — Instituto Ana Nery de Educação e Saúde
+description: Instituto Ana Nery de Educação e Saúde (IANES) — gestão em saúde e educação com eficiência, segurança e responsabilidade.
+lang: pt-BR
+
+# Endereço provisório: https://inaciogambatto.github.io/site-ianes/
+# Ao usar o domínio próprio (www.ianes.org.br), troque baseurl para ""
+url: https://inaciogambatto.github.io
+baseurl: /site-ianes
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+collections:
+  documentos:
+    output: false
+  editais:
+    output: false
+
+exclude:
+  - README.md
+  - GUIA-DO-EDITOR.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor

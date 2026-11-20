@@ -1,119 +1,26 @@
-<!doctype html>
-<html lang="pt-BR" class="no-js">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Quem Somos | IANES</title>
-<meta name="description" content="Missão, visão, valores, objetivos e histórico do Instituto Ana Nery de Educação e Saúde.">
-<meta name="theme-color" content="#142147">
-<meta name="robots" content="noindex, nofollow"><!-- remover na publicação oficial -->
-<meta property="og:title" content="Quem Somos | IANES">
-<meta property="og:description" content="Missão, visão, valores, objetivos e histórico do Instituto Ana Nery de Educação e Saúde.">
-<meta property="og:image" content="assets/img/logo-ianes.png">
-<meta property="og:locale" content="pt_BR">
-<link rel="icon" type="image/png" href="assets/img/favicon.png">
-<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css">
-</head>
-<body>
-<a class="skip" href="#conteudo">Pular para o conteúdo</a>
-<div class="draft-bar" role="note">Versão de validação — conteúdo provisório, sujeito à aprovação institucional.</div>
-<header class="site-header">
-  <div class="container header-inner">
-    <a class="brand" href="index.html" aria-label="IANES — página inicial">
-      <img src="assets/img/logo-ianes.png" alt="IANES — Instituto Ana Nery de Educação e Saúde" width="690" height="220">
-    </a>
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu-principal">
-      <span class="bars" aria-hidden="true"></span><span>Menu</span>
-    </button>
-    <nav class="main-nav" id="menu-principal" aria-label="Menu principal">
-      <ul>
-<li><a href="index.html">Início</a></li>
-<li><a href="quem-somos.html" aria-current="page">Quem Somos</a></li>
-<li><a href="saude.html">Saúde</a></li>
-<li><a href="educacao.html">Educação</a></li>
-<li><a href="governanca.html">Governança</a></li>
-<li><a href="transparencia.html">Transparência</a></li>
-<li><a href="trabalhe-conosco.html">Trabalhe Conosco</a></li>
-<li><a href="contato.html">Contato</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
-<main id="conteudo">
-<section class="page-hero"><div class="container">
-<nav class="breadcrumb" aria-label="Você está em"><a href="index.html">Início</a> › Quem Somos</nav>
-<h1>Quem Somos</h1><p>Conheça a identidade, os princípios e a trajetória do Instituto Ana Nery de Educação e Saúde.</p></div></section>
+---
+layout: default
+title: Quem Somos
+description: Missão, visão, valores, objetivos e histórico do Instituto Ana Nery de Educação e Saúde.
+---
+{%- assign d = site.data.quem_somos -%}
+{% include page-hero.html intro=d.introducao %}
 <section class="block"><div class="container">
   <div class="grid grid-3">
-    <article class="card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></div><h3>Missão</h3><p><span class="placeholder">[TEXTO PROVISÓRIO] Descrever a missão aprovada pelos fundadores.</span></p></article>
-    <article class="card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></div><h3>Visão</h3><p><span class="placeholder">[TEXTO PROVISÓRIO] Descrever a visão de futuro da instituição.</span></p></article>
-    <article class="card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-8-5-8-11a4.5 4.5 0 0 1 8-3 4.5 4.5 0 0 1 8 3c0 6-8 11-8 11z"/></svg></div><h3>Valores</h3><p><span class="placeholder">[TEXTO PROVISÓRIO] Ex.: ética, transparência, eficiência, humanização, responsabilidade.</span></p></article>
+    {% include card.html icone="target" titulo="Missão" texto=d.missao %}
+    {% include card.html icone="eye" titulo="Visão" texto=d.visao %}
+    {% include card.html icone="heart" titulo="Valores" texto=d.valores %}
   </div>
 </div></section>
-<section class="block alt"><div class="container split">
+<section class="block alt"><div class="container split" style="align-items:start">
   <div class="prose">
     <h2>Objetivos institucionais</h2>
     <ul class="list-check">
-      <li>Gerir serviços e unidades de saúde com eficiência e segurança.</li>
-      <li>Promover formação, qualificação e capacitação profissional.</li>
-      <li>Desenvolver projetos assistenciais e educacionais de interesse público.</li>
-      <li>Atuar com transparência, integridade e prestação de contas.</li>
+      {%- for item in d.objetivos %}<li>{{ item }}</li>{% endfor %}
     </ul>
-    <p><span class="placeholder">[TEXTO PROVISÓRIO] Revisar conforme os objetivos previstos no Estatuto.</span></p>
   </div>
   <div class="prose">
     <h2>Histórico</h2>
-    <p><span class="placeholder">[TEXTO PROVISÓRIO] Data de fundação, fundadores, marcos e conquistas da instituição.</span></p>
-    <h3>Por que Ana Nery?</h3>
-    <p>Ana Nery (1814–1880) é considerada a primeira enfermeira do Brasil. Sua dedicação ao cuidado e à vida inspira o nome e o propósito do Instituto.</p>
+    {% include prov.html t=d.historico md=true %}
   </div>
 </div></section>
-
-</main>
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div>
-        <a class="footer-logo" href="index.html"><img src="assets/img/logo-ianes.png" alt="IANES" width="690" height="220" loading="lazy"></a>
-        <p style="margin-top:14px">Instituto Ana Nery de Educação e Saúde<br>Gestão com eficiência, segurança e responsabilidade.</p>
-        <p>CNPJ: <span class="placeholder">00.000.000/0001-00</span></p>
-      </div>
-      <div>
-        <h3>Institucional</h3>
-        <ul>
-<li><a href="quem-somos.html">Quem Somos</a></li>
-<li><a href="saude.html">Saúde</a></li>
-<li><a href="educacao.html">Educação</a></li>
-<li><a href="governanca.html">Governança</a></li>
-<li><a href="transparencia.html">Transparência</a></li>
-<li><a href="trabalhe-conosco.html">Trabalhe Conosco</a></li>
-<li><a href="contato.html">Contato</a></li>
-<li><a href="privacidade.html">Política de Privacidade</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3>Contato</h3>
-        <ul>
-          <li><a href="mailto:contato@ianes.org.br">contato@ianes.org.br</a></li>
-          <li><span class="placeholder">(00) 0000-0000</span></li>
-          <li style="margin-top:8px"><span class="placeholder">Endereço institucional</span></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© <span id="ano">2026</span> IANES — Instituto Ana Nery de Educação e Saúde.</span>
-      <span><a href="privacidade.html">Privacidade e LGPD</a></span>
-    </div>
-  </div>
-</footer>
-<div class="cookie" id="cookie" role="region" aria-label="Aviso de cookies">
-  <p>Este site utiliza apenas recursos essenciais ao seu funcionamento. Saiba mais na nossa <a href="privacidade.html">Política de Privacidade</a>.</p>
-  <button class="btn btn-primary" type="button">Entendi</button>
-</div>
-<script src="assets/js/main.js"></script>
-</body>
-</html>

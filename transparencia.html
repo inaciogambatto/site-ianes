@@ -1,109 +1,29 @@
-<!doctype html>
-<html lang="pt-BR" class="no-js">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Transparência | IANES</title>
-<meta name="description" content="Portal da Transparência da IANES: contratos de gestão, relatórios, regulamentos e prestações de contas.">
-<meta name="theme-color" content="#142147">
-<meta name="robots" content="noindex, nofollow"><!-- remover na publicação oficial -->
-<meta property="og:title" content="Transparência | IANES">
-<meta property="og:description" content="Portal da Transparência da IANES: contratos de gestão, relatórios, regulamentos e prestações de contas.">
-<meta property="og:image" content="assets/img/logo-ianes.png">
-<meta property="og:locale" content="pt_BR">
-<link rel="icon" type="image/png" href="assets/img/favicon.png">
-<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css">
-</head>
-<body>
-<a class="skip" href="#conteudo">Pular para o conteúdo</a>
-<div class="draft-bar" role="note">Versão de validação — conteúdo provisório, sujeito à aprovação institucional.</div>
-<header class="site-header">
-  <div class="container header-inner">
-    <a class="brand" href="index.html" aria-label="IANES — página inicial">
-      <img src="assets/img/logo-ianes.png" alt="IANES — Instituto Ana Nery de Educação e Saúde" width="690" height="220">
-    </a>
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu-principal">
-      <span class="bars" aria-hidden="true"></span><span>Menu</span>
-    </button>
-    <nav class="main-nav" id="menu-principal" aria-label="Menu principal">
-      <ul>
-<li><a href="index.html">Início</a></li>
-<li><a href="quem-somos.html">Quem Somos</a></li>
-<li><a href="saude.html">Saúde</a></li>
-<li><a href="educacao.html">Educação</a></li>
-<li><a href="governanca.html">Governança</a></li>
-<li><a href="transparencia.html" aria-current="page">Transparência</a></li>
-<li><a href="trabalhe-conosco.html">Trabalhe Conosco</a></li>
-<li><a href="contato.html">Contato</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
-<main id="conteudo">
-<section class="page-hero"><div class="container">
-<nav class="breadcrumb" aria-label="Você está em"><a href="index.html">Início</a> › Transparência</nav>
-<h1>Transparência</h1><p>Documentos institucionais e de prestação de contas, publicados conforme as normas aplicáveis e os contratos de gestão celebrados.</p></div></section>
+---
+layout: default
+title: Transparência
+description: "Portal da Transparência da IANES: contratos de gestão, relatórios, regulamentos e prestações de contas."
+---
+{%- assign docs = site.documentos | sort: "data" | reverse -%}
+{% include page-hero.html intro="Documentos institucionais e de prestação de contas, publicados conforme as normas aplicáveis e os contratos de gestão celebrados." %}
 <section class="block"><div class="container" style="max-width:900px">
-  <details class="acc" open><summary>Documentos institucionais</summary><div class="acc-body">
-<p>Estatuto social, ata de fundação, CNPJ, certidões e registros.</p><ul class="doc-list"><li class="empty">Nenhum documento publicado até o momento.</li></ul></div></details>
-  <details class="acc"><summary>Contratos de gestão</summary><div class="acc-body">
-<p>Contratos, termos aditivos e planos de trabalho firmados com o poder público.</p><ul class="doc-list"><li class="empty">Nenhum documento publicado até o momento.</li></ul></div></details>
-  <details class="acc"><summary>Relatórios de atividades</summary><div class="acc-body">
-<p>Relatórios periódicos de execução e de resultados alcançados.</p><ul class="doc-list"><li class="empty">Nenhum documento publicado até o momento.</li></ul></div></details>
-  <details class="acc"><summary>Regulamentos</summary><div class="acc-body">
-<p>Regulamento de compras e contratações, regulamento de pessoal e demais normas internas.</p><ul class="doc-list"><li class="empty">Nenhum documento publicado até o momento.</li></ul></div></details>
-  <details class="acc"><summary>Prestações de contas</summary><div class="acc-body">
-<p>Demonstrações contábeis, balanços, pareceres do Conselho Fiscal e de auditoria.</p><ul class="doc-list"><li class="empty">Nenhum documento publicado até o momento.</li></ul></div></details>
-  <details class="acc"><summary>Outras publicações</summary><div class="acc-body">
-<p>Editais, comunicados e demais publicações aplicáveis.</p><ul class="doc-list"><li class="empty">Nenhum documento publicado até o momento.</li></ul></div></details>
-  <p class="form-note">Os documentos serão disponibilizados em formato PDF. Dúvidas? <a href="contato.html">Fale conosco</a>.</p>
+  {%- for cat in site.data.categorias %}
+  {%- assign itens = docs | where: "categoria", cat.nome %}
+  <details class="acc"{% if forloop.first or itens.size > 0 %} open{% endif %}>
+    <summary>{{ cat.nome }}{% if itens.size > 0 %} <span class="tag">{{ itens.size }}</span>{% endif %}</summary>
+    <div class="acc-body">
+      <p>{{ cat.descricao }}</p>
+      <ul class="doc-list">
+      {%- for doc in itens %}
+        <li>
+          <div><strong>{{ doc.title }}</strong>{% if doc.data %}<br><small>{{ doc.data | date: "%d/%m/%Y" }}</small>{% endif %}{% if doc.descricao != blank %}<br><small>{{ doc.descricao }}</small>{% endif %}</div>
+          {%- if doc.arquivo != blank %}<a class="btn btn-outline" href="{{ doc.arquivo | relative_url }}" target="_blank" rel="noopener">Abrir PDF</a>{% endif %}
+        </li>
+      {%- else %}
+        <li class="empty">Nenhum documento publicado até o momento.</li>
+      {%- endfor %}
+      </ul>
+    </div>
+  </details>
+  {%- endfor %}
+  <p class="form-note">Os documentos são disponibilizados em formato PDF. Dúvidas? <a href="{{ '/contato.html' | relative_url }}">Fale conosco</a>.</p>
 </div></section>
-
-</main>
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div>
-        <a class="footer-logo" href="index.html"><img src="assets/img/logo-ianes.png" alt="IANES" width="690" height="220" loading="lazy"></a>
-        <p style="margin-top:14px">Instituto Ana Nery de Educação e Saúde<br>Gestão com eficiência, segurança e responsabilidade.</p>
-        <p>CNPJ: <span class="placeholder">00.000.000/0001-00</span></p>
-      </div>
-      <div>
-        <h3>Institucional</h3>
-        <ul>
-<li><a href="quem-somos.html">Quem Somos</a></li>
-<li><a href="saude.html">Saúde</a></li>
-<li><a href="educacao.html">Educação</a></li>
-<li><a href="governanca.html">Governança</a></li>
-<li><a href="transparencia.html">Transparência</a></li>
-<li><a href="trabalhe-conosco.html">Trabalhe Conosco</a></li>
-<li><a href="contato.html">Contato</a></li>
-<li><a href="privacidade.html">Política de Privacidade</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3>Contato</h3>
-        <ul>
-          <li><a href="mailto:contato@ianes.org.br">contato@ianes.org.br</a></li>
-          <li><span class="placeholder">(00) 0000-0000</span></li>
-          <li style="margin-top:8px"><span class="placeholder">Endereço institucional</span></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© <span id="ano">2026</span> IANES — Instituto Ana Nery de Educação e Saúde.</span>
-      <span><a href="privacidade.html">Privacidade e LGPD</a></span>
-    </div>
-  </div>
-</footer>
-<div class="cookie" id="cookie" role="region" aria-label="Aviso de cookies">
-  <p>Este site utiliza apenas recursos essenciais ao seu funcionamento. Saiba mais na nossa <a href="privacidade.html">Política de Privacidade</a>.</p>
-  <button class="btn btn-primary" type="button">Entendi</button>
-</div>
-<script src="assets/js/main.js"></script>
-</body>
-</html>

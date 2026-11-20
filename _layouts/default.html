@@ -1,0 +1,89 @@
+{%- assign s = site.data.site -%}
+{%- if page.url == "/" -%}{%- assign full_title = site.title -%}{%- else -%}{%- capture full_title -%}{{ page.title }} | IANES{%- endcapture -%}{%- endif -%}
+{%- assign desc = page.description | default: site.description -%}
+<!doctype html>
+<html lang="pt-BR" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{ full_title }}</title>
+<meta name="description" content="{{ desc | escape }}">
+<meta name="theme-color" content="#142147">
+{%- if s.modo_validacao %}
+<meta name="robots" content="noindex, nofollow">
+{%- endif %}
+<meta property="og:title" content="{{ full_title | escape }}">
+<meta property="og:description" content="{{ desc | escape }}">
+<meta property="og:image" content="{{ '/assets/img/logo-ianes.png' | absolute_url }}">
+<meta property="og:locale" content="pt_BR">
+<link rel="icon" type="image/png" href="{{ '/assets/img/favicon.png' | relative_url }}">
+<link rel="apple-touch-icon" href="{{ '/assets/img/apple-touch-icon.png' | relative_url }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+</head>
+<body>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+{%- if s.modo_validacao %}
+<div class="draft-bar" role="note">{{ s.aviso_validacao }}</div>
+{%- endif %}
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="{{ '/' | relative_url }}" aria-label="IANES — página inicial">
+      <img src="{{ '/assets/img/logo-ianes.png' | relative_url }}" alt="IANES — Instituto Ana Nery de Educação e Saúde" width="690" height="220">
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu-principal">
+      <span class="bars" aria-hidden="true"></span><span>Menu</span>
+    </button>
+    <nav class="main-nav" id="menu-principal" aria-label="Menu principal">
+      <ul>
+        {%- for item in site.data.menu %}
+        <li><a href="{{ item.url | relative_url }}"{% if page.url == item.url %} aria-current="page"{% endif %}>{{ item.titulo }}</a></li>
+        {%- endfor %}
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="conteudo">
+{{ content }}
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a class="footer-logo" href="{{ '/' | relative_url }}"><img src="{{ '/assets/img/logo-ianes.png' | relative_url }}" alt="IANES" width="690" height="220" loading="lazy"></a>
+        <p style="margin-top:14px">{{ s.nome }}<br>{{ s.slogan }}.</p>
+        {%- if s.cnpj != blank %}<p>CNPJ: {% include prov.html t=s.cnpj %}</p>{% endif %}
+      </div>
+      <div>
+        <h3>Institucional</h3>
+        <ul>
+          {%- for item in site.data.menu offset: 1 %}
+          <li><a href="{{ item.url | relative_url }}">{{ item.titulo }}</a></li>
+          {%- endfor %}
+          <li><a href="{{ '/privacidade.html' | relative_url }}">Política de Privacidade</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contato</h3>
+        <ul>
+          {%- if s.email_contato != blank %}<li><a href="mailto:{{ s.email_contato }}">{{ s.email_contato }}</a></li>{% endif %}
+          {%- if s.telefone != blank %}<li>{% include prov.html t=s.telefone %}</li>{% endif %}
+          {%- if s.endereco != blank %}<li style="margin-top:8px">{% include prov.html t=s.endereco %}</li>{% endif %}
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="ano">{{ site.time | date: "%Y" }}</span> IANES — {{ s.nome }}.</span>
+      <span><a href="{{ '/privacidade.html' | relative_url }}">Privacidade e LGPD</a></span>
+    </div>
+  </div>
+</footer>
+<div class="cookie" id="cookie" role="region" aria-label="Aviso de cookies">
+  <p>Este site utiliza apenas recursos essenciais ao seu funcionamento. Saiba mais na nossa <a href="{{ '/privacidade.html' | relative_url }}">Política de Privacidade</a>.</p>
+  <button class="btn btn-primary" type="button">Entendi</button>
+</div>
+<script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+</body>
+</html>

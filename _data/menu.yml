@@ -1,0 +1,17 @@
+# Menu principal (não editável pelo painel)
+- titulo: Início
+  url: /
+- titulo: Quem Somos
+  url: /quem-somos.html
+- titulo: Saúde
+  url: /saude.html
+- titulo: Educação
+  url: /educacao.html
+- titulo: Governança
+  url: /governanca.html
+- titulo: Transparência
+  url: /transparencia.html
+- titulo: Trabalhe Conosco
+  url: /trabalhe-conosco.html
+- titulo: Contato
+  url: /contato.html

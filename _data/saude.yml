@@ -1,0 +1,10 @@
+introducao: Atuação na gestão de serviços de saúde, com foco em qualidade assistencial, segurança do paciente e eficiência na aplicação dos recursos.
+servicos:
+  - titulo: Gestão hospitalar
+    texto: Gestão administrativa, assistencial e operacional de unidades de saúde, com indicadores, protocolos e controle de qualidade.
+  - titulo: Atenção à saúde
+    texto: Organização de serviços assistenciais centrados no paciente, com humanização e integração à rede de saúde.
+  - titulo: Projetos assistenciais
+    texto: Iniciativas e programas voltados às necessidades das comunidades atendidas.
+destaque_titulo: Unidades e projetos
+destaque_texto: "[TEXTO PROVISÓRIO] Listar unidades geridas e projetos em andamento, quando houver."

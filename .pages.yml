@@ -1,0 +1,293 @@
+# Configuração do painel administrativo (Pages CMS — https://app.pagescms.org)
+# Define o que os editores podem alterar pelo painel, sem mexer em código.
+
+settings:
+  content:
+    merge: true
+  commit:
+    identity: user
+    templates:
+      create: "Painel: cria {path} ({userName})"
+      update: "Painel: atualiza {path} ({userName})"
+      delete: "Painel: remove {path} ({userName})"
+      rename: "Painel: renomeia {oldPath} para {newPath} ({userName})"
+
+media:
+  - name: documentos
+    label: Documentos (PDF)
+    input: assets/docs
+    output: /assets/docs
+    rename: safe
+    extensions: [pdf, doc, docx, xls, xlsx, odt, ods, zip]
+  - name: imagens
+    label: Imagens
+    input: assets/img/uploads
+    output: /assets/img/uploads
+    rename: safe
+    extensions: [jpg, jpeg, png, webp]
+
+content:
+  - name: transparencia
+    label: Transparência — Documentos
+    type: collection
+    path: _documentos
+    filename: "{year}-{month}-{day}-{primary}.md"
+    format: yaml-frontmatter
+    view:
+      fields: [title, categoria, data]
+      primary: title
+      sort: [data, title, categoria]
+      search: [title, categoria, descricao]
+      default:
+        sort: data
+        order: desc
+    fields:
+      - name: title
+        label: Título do documento
+        type: string
+        required: true
+        description: "Ex.: Relatório de Atividades — 1º trimestre 2027"
+      - name: categoria
+        label: Categoria
+        type: select
+        required: true
+        options:
+          values:
+            - Documentos institucionais
+            - Contratos de gestão
+            - Relatórios de atividades
+            - Regulamentos
+            - Prestações de contas
+            - Outras publicações
+      - name: data
+        label: Data do documento
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+      - name: arquivo
+        label: Arquivo (PDF)
+        type: file
+        required: true
+        description: Clique para enviar o PDF do seu computador.
+        options:
+          media: documentos
+      - name: descricao
+        label: Descrição (opcional)
+        type: text
+
+  - name: editais
+    label: Trabalhe Conosco — Editais
+    type: collection
+    path: _editais
+    filename: "{primary}.md"
+    format: yaml-frontmatter
+    view:
+      fields: [title, situacao, inscricao_inicio]
+      primary: title
+      sort: [inscricao_inicio, title]
+      default:
+        sort: inscricao_inicio
+        order: desc
+    fields:
+      - name: title
+        label: Número do edital
+        type: string
+        required: true
+        description: "Ex.: Edital 002/2027"
+      - name: cargo
+        label: Cargo / função
+        type: string
+        required: true
+      - name: inscricao_inicio
+        label: Início das inscrições
+        type: date
+        options:
+          format: yyyy-MM-dd
+      - name: inscricao_fim
+        label: Fim das inscrições
+        type: date
+        options:
+          format: yyyy-MM-dd
+      - name: situacao
+        label: Situação
+        type: select
+        required: true
+        options:
+          values: [Em breve, Inscrições abertas, Em andamento, Encerrado, Cancelado]
+      - name: edital
+        label: Edital (PDF)
+        type: file
+        options:
+          media: documentos
+      - name: anexos
+        label: Anexos, retificações e resultados
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{titulo}"
+        fields:
+          - name: titulo
+            label: Título
+            type: string
+            description: "Ex.: Resultado preliminar"
+          - name: arquivo
+            label: Arquivo
+            type: file
+            options:
+              media: documentos
+
+  - name: paginas
+    label: Textos das páginas
+    type: group
+    items:
+      - name: inicio
+        label: Início
+        type: file
+        path: _data/inicio.yml
+        format: yaml
+        fields:
+          - { name: chamada, label: Chamada (texto pequeno acima do título), type: string }
+          - { name: titulo, label: Título principal, type: string }
+          - { name: apresentacao, label: Texto de apresentação, type: text }
+          - { name: areas_intro, label: Introdução das áreas de atuação, type: text }
+          - { name: saude_resumo, label: Resumo — Saúde, type: text }
+          - { name: educacao_resumo, label: Resumo — Educação, type: text }
+          - { name: quem_somos_resumo, label: Resumo — Quem somos, type: text }
+          - { name: destaques, label: Destaques (lista com marcadores), type: string, list: true }
+          - { name: contato_titulo, label: Chamada de contato — título, type: string }
+          - { name: contato_texto, label: Chamada de contato — texto, type: text }
+
+      - name: quem_somos
+        label: Quem Somos
+        type: file
+        path: _data/quem_somos.yml
+        format: yaml
+        fields:
+          - { name: introducao, label: Introdução, type: text }
+          - { name: missao, label: Missão, type: text }
+          - { name: visao, label: Visão, type: text }
+          - { name: valores, label: Valores, type: text }
+          - { name: objetivos, label: Objetivos institucionais, type: string, list: true }
+          - name: historico
+            label: Histórico
+            type: rich-text
+            options:
+              media: false
+
+      - name: saude
+        label: Saúde
+        type: file
+        path: _data/saude.yml
+        format: yaml
+        fields:
+          - { name: introducao, label: Introdução, type: text }
+          - name: servicos
+            label: Cartões de atuação
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{titulo}"
+            fields:
+              - { name: titulo, label: Título, type: string }
+              - { name: texto, label: Texto, type: text }
+          - { name: destaque_titulo, label: Seção de destaque — título, type: string }
+          - name: destaque_texto
+            label: Seção de destaque — texto
+            type: rich-text
+            options:
+              media: false
+
+      - name: educacao
+        label: Educação
+        type: file
+        path: _data/educacao.yml
+        format: yaml
+        fields:
+          - { name: introducao, label: Introdução, type: text }
+          - name: servicos
+            label: Cartões de atuação
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{titulo}"
+            fields:
+              - { name: titulo, label: Título, type: string }
+              - { name: texto, label: Texto, type: text }
+          - { name: destaque_titulo, label: Seção de destaque — título, type: string }
+          - name: destaque_texto
+            label: Seção de destaque — texto
+            type: rich-text
+            options:
+              media: false
+
+      - name: governanca
+        label: Governança
+        type: file
+        path: _data/governanca.yml
+        format: yaml
+        fields:
+          - { name: introducao, label: Introdução, type: text }
+          - { name: nota_composicao, label: Observação sobre a composição, type: text }
+          - name: membros
+            label: Membros
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{cargo} — {nome}"
+            fields:
+              - name: orgao
+                label: Órgão
+                type: select
+                options:
+                  values: [Diretoria, Conselho de Administração, Conselho Fiscal]
+              - { name: cargo, label: Cargo, type: string }
+              - { name: nome, label: Nome, type: string }
+              - { name: mandato, label: Mandato, type: string, description: "Ex.: 2026–2030" }
+
+      - name: privacidade
+        label: Política de Privacidade
+        type: file
+        path: privacidade.md
+        format: yaml-frontmatter
+        fields:
+          - { name: layout, type: string, hidden: true, default: privacidade }
+          - { name: title, type: string, hidden: true, default: Política de Privacidade }
+          - { name: description, type: string, hidden: true }
+          - { name: permalink, type: string, hidden: true, default: /privacidade.html }
+          - { name: introducao, label: Introdução, type: text }
+          - name: body
+            label: Texto da política
+            type: rich-text
+            options:
+              media: false
+
+  - name: dados
+    label: Dados institucionais e contato
+    type: file
+    path: _data/site.yml
+    format: yaml
+    fields:
+      - { name: nome, label: Nome da instituição, type: string }
+      - { name: slogan, label: Slogan, type: string }
+      - { name: cnpj, label: CNPJ, type: string }
+      - { name: endereco, label: Endereço, type: text }
+      - { name: telefone, label: Telefone, type: string, description: "Ex.: (11) 3333-4444" }
+      - { name: whatsapp, label: WhatsApp (opcional), type: string, description: "Ex.: (11) 98888-7777 — deixe vazio para não exibir" }
+      - { name: email_contato, label: E-mail de contato, type: string }
+      - name: setores
+        label: E-mails dos setores
+        type: object
+        list: true
+        fields:
+          - { name: nome, label: Setor, type: string }
+          - { name: email, label: E-mail, type: string }
+      - name: modo_validacao
+        label: Modo de validação
+        type: boolean
+        description: Ligado = mostra a faixa "versão de validação" e esconde o site do Google. Desligue na publicação oficial.
+      - { name: aviso_validacao, label: Texto da faixa de validação, type: string }

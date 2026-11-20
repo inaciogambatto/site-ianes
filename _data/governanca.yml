@@ -1,0 +1,31 @@
+introducao: Estrutura de governança do Instituto, responsável pela gestão, deliberação e fiscalização das atividades.
+nota_composicao: "[TEXTO PROVISÓRIO] Preencher conforme ata de eleição e mandatos vigentes."
+membros:
+  - orgao: Diretoria
+    cargo: Presidente
+    nome: "[PROVISÓRIO] Nome a definir"
+    mandato: ""
+  - orgao: Diretoria
+    cargo: Vice-presidente
+    nome: "[PROVISÓRIO] Nome a definir"
+    mandato: ""
+  - orgao: Diretoria
+    cargo: Diretor(a) Administrativo(a)
+    nome: "[PROVISÓRIO] Nome a definir"
+    mandato: ""
+  - orgao: Conselho de Administração
+    cargo: Presidente do Conselho
+    nome: "[PROVISÓRIO] Nome a definir"
+    mandato: ""
+  - orgao: Conselho de Administração
+    cargo: Conselheiro(a)
+    nome: "[PROVISÓRIO] Nome a definir"
+    mandato: ""
+  - orgao: Conselho Fiscal
+    cargo: Conselheiro(a) titular
+    nome: "[PROVISÓRIO] Nome a definir"
+    mandato: ""
+  - orgao: Conselho Fiscal
+    cargo: Conselheiro(a) suplente
+    nome: "[PROVISÓRIO] Nome a definir"
+    mandato: ""

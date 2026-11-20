@@ -1,0 +1,1 @@
+<article class="card"><div class="icon">{% include icone.html nome=include.icone %}</div><h3>{{ include.titulo }}</h3><p>{% include prov.html t=include.texto %}</p>{% if include.link %}<a class="more" href="{{ include.link | relative_url }}">{{ include.link_texto | default: "Saiba mais" }} →</a>{% endif %}</article>

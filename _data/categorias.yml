@@ -1,0 +1,13 @@
+# Categorias da página Transparência (ordem de exibição). Não editável pelo painel.
+- nome: Documentos institucionais
+  descricao: Estatuto social, ata de fundação, CNPJ, certidões e registros.
+- nome: Contratos de gestão
+  descricao: Contratos, termos aditivos e planos de trabalho firmados com o poder público.
+- nome: Relatórios de atividades
+  descricao: Relatórios periódicos de execução e de resultados alcançados.
+- nome: Regulamentos
+  descricao: Regulamento de compras e contratações, regulamento de pessoal e demais normas internas.
+- nome: Prestações de contas
+  descricao: Demonstrações contábeis, balanços, pareceres do Conselho Fiscal e de auditoria.
+- nome: Outras publicações
+  descricao: Editais, comunicados e demais publicações aplicáveis.
