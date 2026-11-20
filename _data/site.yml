@@ -1,9 +1,8 @@
 nome: Instituto Ana Nery de Educação e Saúde
 slogan: Gestão com eficiência, segurança e responsabilidade
-cnpj: "[PROVISÓRIO] 00.000.000/0001-00"
+cnpj: "[PROVISÓRIO] 00.000.000/0001-01"
 endereco: "[PROVISÓRIO] Rua, número, bairro, cidade/UF, CEP"
 telefone: "[PROVISÓRIO] (00) 0000-0000"
-whatsapp: ""
 email_contato: contato@ianes.org.br
 setores:
   - nome: Presidência
